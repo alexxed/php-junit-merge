@@ -34,6 +34,7 @@
 namespace AndreasWeber\PHPJUNITMERGE\Tests\Unit;
 
 use AndreasWeber\PHPJUNITMERGE\Console\Application;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use TheSeer\fDOM\fDOMDOcument;
 
@@ -46,7 +47,7 @@ use TheSeer\fDOM\fDOMDOcument;
  * @link      https://github.com/andreas-weber/php-junit-merge
  * @since     Class available since Release 1.0.0
  */
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends TestCase
 {
     private $fixtures;
     private $resultFile;
@@ -58,7 +59,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
     /**
      * setUp()
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fixtures = realpath(__DIR__ . '/Fixtures');
         $this->resultFile = realpath($this->fixtures . '/../tmp') . '/tmp.xml';

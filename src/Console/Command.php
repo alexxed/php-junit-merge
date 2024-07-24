@@ -56,23 +56,11 @@ class Command extends AbstractCommand
     /**
      * Configures the current command.
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('phpjunitmerge')
-            ->setDefinition(
-                array(
-                    new InputArgument(
-                        'dir',
-                        InputArgument::REQUIRED,
-                        'Directory where all files ready to get merged are stored'
-                    ),
-                    new InputArgument(
-                        'file',
-                        InputArgument::REQUIRED,
-                        'The target file in which the merged result should be written'
-                    )
-                )
-            )
+            ->addArgument('dir', InputArgument::REQUIRED, 'Directory where all files ready to get merged are stored')
+            ->addArgument('file', InputArgument::REQUIRED, 'The target file in which the merged result should be written')
             ->addOption(
                 'names',
                 null,
@@ -96,15 +84,7 @@ class Command extends AbstractCommand
 			);
     }
 
-    /**
-     * Executes the current command.
-     *
-     * @param InputInterface  $input  An InputInterface instance
-     * @param OutputInterface $output An OutputInterface instance
-     *
-     * @return null|integer null or 0 if everything went fine, or an error code
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $directory = $input->getArgument('dir');
         $fileOut = $input->getArgument('file');

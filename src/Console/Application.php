@@ -34,6 +34,7 @@
 namespace AndreasWeber\PHPJUNITMERGE\Console;
 
 use Symfony\Component\Console\Application as ConsoleApplication;
+use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
@@ -55,7 +56,7 @@ class Application extends ConsoleApplication
      */
     public function __construct()
     {
-        parent::__construct('phpjunitmerge', '1.0.6');
+        parent::__construct('phpjunitmerge', '1.0.8');
     }
 
     /**
@@ -65,7 +66,7 @@ class Application extends ConsoleApplication
      *
      * @return string The command name
      */
-    protected function getCommandName(InputInterface $input)
+    protected function getCommandName(InputInterface $input): string
     {
         return 'phpjunitmerge';
     }
@@ -75,11 +76,11 @@ class Application extends ConsoleApplication
      *
      * @return array An array of default Command instances
      */
-    protected function getDefaultCommands()
+    protected function getDefaultCommands(): array
     {
         $defaultCommands = parent::getDefaultCommands();
 
-        $defaultCommands[] = new Command;
+        $defaultCommands[] = new Command("phpjunitmerge");
 
         return $defaultCommands;
     }
@@ -90,7 +91,7 @@ class Application extends ConsoleApplication
      *
      * @return InputDefinition
      */
-    public function getDefinition()
+    public function getDefinition(): InputDefinition
     {
         $inputDefinition = parent::getDefinition();
         $inputDefinition->setArguments();
@@ -106,7 +107,7 @@ class Application extends ConsoleApplication
      *
      * @return int 0 if everything went fine, or an error code
      */
-    public function doRun(InputInterface $input, OutputInterface $output)
+    public function doRun(InputInterface $input, OutputInterface $output): int
     {
         if (!$input->hasParameterOption('--quiet')) {
             $output->write(
@@ -127,6 +128,6 @@ class Application extends ConsoleApplication
             $input = new ArrayInput(array('--help'));
         }
 
-        parent::doRun($input, $output);
+        return parent::doRun($input, $output);
     }
 }
